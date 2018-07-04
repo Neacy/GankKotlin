@@ -5,7 +5,9 @@ Gank by kotlin
 # Thanks
 
 RxJava        : https://github.com/ReactiveX/RxJava
+
 RxAndroid     : https://github.com/ReactiveX/RxAndroid
+
 retrofit      : https://github.com/square/retrofit
 
 # Captures
