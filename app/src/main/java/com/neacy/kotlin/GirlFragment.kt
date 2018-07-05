@@ -53,7 +53,7 @@ class GirlFragment : Fragment(), Base.CallBackView<GirlResult> {
         return view
     }
 
-    override fun onHttpSuccess(results: MutableList<GirlResult>) {
+    override fun onHttpSuccess(results: MutableList<GirlResult>?) {
         if (results != null) {
             datas.addAll(results)
             girlAdapter?.notifyDataSetChanged()

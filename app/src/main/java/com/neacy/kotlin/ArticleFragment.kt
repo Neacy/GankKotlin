@@ -62,8 +62,8 @@ class ArticleFragment : Fragment(), Base.CallBackView<AndroidResult> {
         return view
     }
 
-    override fun onHttpSuccess(results: MutableList<AndroidResult>) {
-        LogUtil.w("Jayuchou", "得到的长度 ${if (results != null) results.size else 0}")
+    override fun onHttpSuccess(results: MutableList<AndroidResult>?) {
+        LogUtil.w("Jayuchou", "得到的长度 ${results?.size ?: -1}")
 
         if (results != null) {
             datas.addAll(results)

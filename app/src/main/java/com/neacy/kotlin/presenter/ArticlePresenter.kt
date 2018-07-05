@@ -14,7 +14,6 @@ import io.reactivex.schedulers.Schedulers
  * @since 2018/7/4
  */
 class ArticlePresenter : Base.Presenter<AndroidResult> {
-
     var callback: Base.CallBackView<AndroidResult>? = null
 
     override fun setCallBackView(cbView: Base.CallBackView<AndroidResult>) {
@@ -25,8 +24,8 @@ class ArticlePresenter : Base.Presenter<AndroidResult> {
         GankHttpRequest.instance.mApiService.getAndroidData().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Consumer<HttpResult<MutableList<AndroidResult>>> {
-                    override fun accept(t: HttpResult<MutableList<AndroidResult>>?) {
-                        callback?.onHttpSuccess(t?.results!!)
+                    override fun accept(t: HttpResult<MutableList<AndroidResult>>) {
+                        callback?.onHttpSuccess(t.results)
                     }
                 }, object : Consumer<Throwable> {
                     override fun accept(t: Throwable?) {

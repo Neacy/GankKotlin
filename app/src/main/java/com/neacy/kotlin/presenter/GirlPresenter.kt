@@ -25,8 +25,8 @@ class GirlPresenter : Base.Presenter<GirlResult> {
         GankHttpRequest.instance.mApiService.getGirlData().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Consumer<HttpResult<MutableList<GirlResult>>> {
-                    override fun accept(t: HttpResult<MutableList<GirlResult>>?) {
-                        callback?.onHttpSuccess(t?.results!!)
+                    override fun accept(t: HttpResult<MutableList<GirlResult>>) {
+                        callback?.onHttpSuccess(t.results)
                     }
 
                 }, object : Consumer<Throwable> {
