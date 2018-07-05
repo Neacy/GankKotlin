@@ -3,6 +3,7 @@ package com.neacy.kotlin.presenter
 import com.neacy.kotlin.api.GankHttpRequest
 import com.neacy.kotlin.bean.AndroidResult
 import com.neacy.kotlin.bean.HttpResult
+import com.neacy.kotlin.constant.Constant
 import com.neacy.kotlin.constant.LogUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -21,11 +22,11 @@ class ArticlePresenter : Base.Presenter<AndroidResult> {
     }
 
     fun doHttpRequest() {
-        GankHttpRequest.instance.mApiService.getAndroidData().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Consumer<HttpResult<MutableList<AndroidResult>>> {
-                    override fun accept(t: HttpResult<MutableList<AndroidResult>>) {
-                        callback?.onHttpSuccess(t.results)
+        GankHttpRequest.instance.mApiService.getAndroidData()
+                .compose(Constant.transformer())
+                .subscribe(object : Consumer<MutableList<AndroidResult>> {
+                    override fun accept(t: MutableList<AndroidResult>?) {
+                        callback?.onHttpSuccess(t)
                     }
                 }, object : Consumer<Throwable> {
                     override fun accept(t: Throwable?) {

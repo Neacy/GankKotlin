@@ -27,7 +27,7 @@ class GankHttpRequest private constructor() {
         LogUtil.w(TAG, "==== start GankeHttpRequest init ====")
         val okHttpBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
-            val logInteceptor: HttpLoggingInterceptor = HttpLoggingInterceptor()
+            val logInteceptor = HttpLoggingInterceptor()
             logInteceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             okHttpBuilder.addInterceptor(logInteceptor)
         }
