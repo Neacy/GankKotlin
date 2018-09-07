@@ -21,16 +21,17 @@ class ArticlePresenter : Base.Presenter<AndroidResult> {
         callback = cbView
     }
 
-    fun doHttpRequest() {
-        GankHttpRequest.instance.mApiService.getAndroidData()
+    fun doHttpRequest(page: Int, requestType: Int) {
+        GankHttpRequest.instance.mApiService.getAndroidData(page)
                 .compose(Constant.transformer())
                 .subscribe(object : Consumer<MutableList<AndroidResult>> {
                     override fun accept(t: MutableList<AndroidResult>?) {
-                        callback?.onHttpSuccess(t)
+                        callback?.onHttpSuccess(requestType, t)
                     }
                 }, object : Consumer<Throwable> {
                     override fun accept(t: Throwable?) {
                         LogUtil.e("Jayuchou", "==== 文章接口请求失败 = ${t.toString()}")
+                        callback?.onHttpFailed(requestType, t!!)
                     }
                 })
     }

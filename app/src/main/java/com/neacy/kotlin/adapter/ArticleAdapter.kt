@@ -14,18 +14,25 @@ import kotlinx.android.synthetic.main.item_article.view.*
  * @author yuzongxu <yuzongxu@xiaoyouzi.com>
  * @since 2018/7/4
  */
-class ArticleAdapter(var datas: MutableList<AndroidResult>) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
+class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    var datas: MutableList<AndroidResult>? = null
+
+    constructor(datas: MutableList<AndroidResult>) {
+        this.datas = datas
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleAdapter.ArticleViewHolder {
         return ArticleViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_article, parent, false))
     }
 
     override fun getItemCount(): Int {
-        return datas.size
+        return datas!!.size
     }
 
-    override fun onBindViewHolder(holder: ArticleAdapter.ArticleViewHolder, position: Int) {
-        var data: AndroidResult = datas.get(position)
+    override fun onBindViewHolder(_holder: RecyclerView.ViewHolder, position: Int) {
+        var holder: ArticleViewHolder = _holder as ArticleViewHolder
+        var data: AndroidResult = datas!!.get(position)
         holder.title?.text = data.desc
         holder.author?.text = data.who + "："
         holder.time?.text = data.publishedAt

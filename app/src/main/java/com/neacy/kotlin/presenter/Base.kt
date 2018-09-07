@@ -7,7 +7,9 @@ package com.neacy.kotlin.presenter
  */
 interface Base {
     interface CallBackView<T> {
-        open fun onHttpSuccess(results: MutableList<T>?)
+        open fun onHttpSuccess(requestType: Int, results: MutableList<T>?)
+
+        open fun onHttpFailed(requestType: Int, t: Throwable)
     }
 
     interface Presenter<T> {

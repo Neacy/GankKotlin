@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.item_girl.view.*
  * @author yuzongxu <yuzongxu@xiaoyouzi.com>
  * @since 2018/7/4
  */
-class GirlAdapter(var datas: MutableList<GirlResult>) : RecyclerView.Adapter<GirlAdapter.GirlViewHolder>() {
+class GirlAdapter(var datas: MutableList<GirlResult>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var realWidth: Int = 0
 
@@ -42,7 +42,8 @@ class GirlAdapter(var datas: MutableList<GirlResult>) : RecyclerView.Adapter<Gir
         return datas.size
     }
 
-    override fun onBindViewHolder(holder: GirlViewHolder, position: Int) {
+    override fun onBindViewHolder(_holder: RecyclerView.ViewHolder, position: Int) {
+        var holder: GirlViewHolder = _holder as GirlViewHolder
         var controller: DraweeController = Fresco.newDraweeControllerBuilder()
                 .setControllerListener(object : ControllerListener<ImageInfo> {
                     override fun onFailure(id: String?, throwable: Throwable?) {

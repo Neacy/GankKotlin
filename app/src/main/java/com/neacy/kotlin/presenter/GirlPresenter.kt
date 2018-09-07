@@ -22,16 +22,17 @@ class GirlPresenter : Base.Presenter<GirlResult> {
         callback = cbView
     }
 
-    fun doGetGirlData() {
-        GankHttpRequest.instance.mApiService.getGirlData()
+    fun doGetGirlData(type: Int, page: Int) {
+        GankHttpRequest.instance.mApiService.getGirlData(page)
                 .compose(Constant.transformer())
                 .subscribe(object : Consumer<MutableList<GirlResult>> {
                     override fun accept(t: MutableList<GirlResult>) {
-                        callback?.onHttpSuccess(t)
+                        callback?.onHttpSuccess(type, t)
                     }
                 }, object : Consumer<Throwable> {
                     override fun accept(t: Throwable?) {
                         LogUtil.e("Jayuchou", "==== 美女接口请求失败 = ${t.toString()}")
+                        callback?.onHttpFailed(type, t!!)
                     }
                 })
     }
